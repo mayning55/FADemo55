@@ -1,0 +1,74 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<FADemo.Models.Account.ExtendIdentityUser>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<h1>All Users</h1>
+
+<p>
+    <a asp-action="CreateUser" asp-controller="User">
+        Create New User
+    </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+        <tr>UserName</tr>
+        </th>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>
+                    @user.UserName
+                </td>
+
+                <td>
+                    <form method="post" asp-controller="User" asp-action="DeleteUser" asp-route-UserId="@user.Id">
+                        @if (user.IsDisabled)
+                        {
+                            <a asp-action="EnableUser" asp-controller="User"
+                               asp-route-UserId="@user.Id" class="btn btn-primary">Enable</a>
+                        }
+                        else
+                        {
+                            <a asp-action="DisableUser" asp-controller="User"
+                               asp-route-UserId="@user.Id" class="btn btn-danger">Disable</a>
+                        }
+
+                        <a asp-action="ResetUserPassword" asp-controller="User"
+                           asp-route-UserId="@user.Id" class="btn btn-primary">ResetPassword</a>
+                        <a asp-controller="User" asp-action="Edituser"
+                           asp-route-UserId="@user.Id" class="btn btn-primary">Edit</a>
+                        <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                            <span>Are you sure want to delete?</span>
+                            <button type="submit" class="btn btn-danger">Yes</button>
+                            <a href="#" class="btn btn-primary"
+                               onclick="confirmDelete('@user.Id', false)">No</a>
+                        </span>
+                        <span id="deleteSpan_@user.Id">
+                            <a href="#" class="btn btn-danger"
+                               onclick="confirmDelete('@user.Id', true)">Delete</a>
+                        </span>
+                    </form>
+            </tr>
+        }
+    </tbody>        
+
+<script>
+    function confirmDelete(uniqueId, isDeleteClicked) {
+        var deleteSpan = 'deleteSpan_' + uniqueId;
+        var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+        if (isDeleteClicked) {
+            $('#' + deleteSpan).hide();
+            $('#' + confirmDeleteSpan).show();
+        } else {
+            $('#' + deleteSpan).show();
+            $('#' + confirmDeleteSpan).hide();
+        }
+    }
+</script>

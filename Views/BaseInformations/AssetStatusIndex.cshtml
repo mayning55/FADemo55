@@ -1,0 +1,50 @@
+﻿@model IEnumerable<FADemo.Models.BaseInformation.AssetStatus>
+
+
+@{
+    ViewData["Title"] = "AssetStatusIndex";
+}
+
+<h1>AssetStatusIndex</h1>
+
+<p>
+    <a asp-controller="BaseInformations" asp-action="AssetStatusCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetStatusNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetStatusName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetStatusDescription)
+            </th>
+            @*             <th>
+            @Html.DisplayNameFor(model => model.CreateDatetime)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.IsDisabled)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetStatusNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetStatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetStatusDescription)
+                </td>               
+            </tr>
+        }
+    </tbody>
+</table>

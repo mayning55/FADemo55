@@ -1,0 +1,66 @@
+﻿@model FADemo.Models.Organization.Department
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Department</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="DepartmentId" />
+            <div class="form-group">
+                <label asp-for="DepartmentNumber" class="control-label"></label>
+                <input asp-for="DepartmentNumber" class="form-control" />
+                <span asp-validation-for="DepartmentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentName" class="control-label"></label>
+                <input asp-for="DepartmentName" class="form-control" />
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDatetime" class="control-label"></label>
+                <input asp-for="CreateDatetime" class="form-control" />
+                <span asp-validation-for="CreateDatetime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<br />
+<div class="card">
+    <div class="card-header">
+        <h3>Employees in this Department</h3>
+    </div>
+    <div class="card-body">
+        @if (Model.Employees != null && Model.Employees.Any())
+        {
+            foreach (var employee in Model.Employees)
+            {
+                <h5 class="card-title">
+                    <a asp-controller="Employees" asp-action="Edit" asp-route-id="@employee.EmployeeId">@employee.EmployeeName</a>
+                </h5>
+            }
+        }
+        else
+        {
+            <h5 class="card-title">None at the moment</h5>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

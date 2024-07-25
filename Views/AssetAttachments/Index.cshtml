@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FADemo.Models.FixedAsset.AssetAttachment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-controller="AssetCreateBases" asp-action="Index">Back To List</a>
+</p>
+<div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttachmentUploadUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AttachmentUploadDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <td>Add</td>
+        @foreach (var item in Model)
+        {
+            @if (item.IsAdd == "add")
+            {
+
+            <tr>
+                <td>
+                    <a asp-action="ShowFile" asp-route-id="@item.AttachmentId" target="_blank">@Html.DisplayFor(modelItem => item.Description)</a>
+                </td>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.AttachmentUploadUser)</a>
+                </td>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.AttachmentUploadDate)</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" asp-action="DownloadFile" asp-route-id="@item.AttachmentId">Download</a>
+                    <a type="button" class="btn btn-primary" asp-action="DeleteFile" asp-route-id="@item.AttachmentId">Delete</a>
+                </td>
+            </tr>
+
+            }
+        }
+    </tbody>
+
+    <tbody>
+    <td>Update</td>
+        @foreach (var item in Model)
+        {
+            @if (item.IsAdd == "Update")
+            {
+
+            <tr>
+                <td>
+                    <a asp-action="ShowFile" asp-route-id="@item.AttachmentId" target="_blank">@Html.DisplayFor(modelItem => item.Description)</a>
+                </td>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.AttachmentUploadUser)</a>
+                </td>
+                <td>
+                    <a>@Html.DisplayFor(modelItem => item.AttachmentUploadDate)</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-primary" asp-action="DownloadFile" asp-route-id="@item.AttachmentId">Download</a>
+                    <a type="button" class="btn btn-primary" asp-action="DeleteFile" asp-route-id="@item.AttachmentId">Delete</a>
+                </td>
+            </tr>
+
+            }
+        }
+    </tbody>
+</table>

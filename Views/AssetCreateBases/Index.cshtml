@@ -1,0 +1,174 @@
+﻿@model IEnumerable<FADemo.Models.FixedAsset.AssetCreateBase>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetName)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.AssetRecordUser)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.AssetRecordDate)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.AssetType)
+            </th>
+            @*  <th>
+            @Html.DisplayNameFor(model => model.Unit)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            @*             <th>
+            @Html.DisplayNameFor(model => model.Price)
+            </th> *@
+            @* <th>
+            @Html.DisplayNameFor(model => model.AssetDeprmetHod)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.LastDeprmetHodDate)
+            </th> *@
+            @*             <th>
+            @Html.DisplayNameFor(model => model.AssetAlterMode)
+            </th> *@
+            @* <th>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Vendor)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Specification)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Description)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.AssetStatus)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.BeginUseDate)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            @*             <th>
+            @Html.DisplayNameFor(model => model.UploadFileName)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.UploadData)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.UploadLength)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.UploadContentType)
+            </th>
+            <th></th> *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.AssetId"> @Html.DisplayFor(modelItem => item.AssetNumber)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetName)
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.AssetRecordUser)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.AssetRecordDate)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetType.AssetTypeName)
+                </td>
+                @* <td>
+            @Html.DisplayFor(modelItem => item.Unit)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                @*             <td>
+            @Html.DisplayFor(modelItem => item.Price)
+            </td> *@
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.AssetDeprmetHod.AssetDeprmetHodId)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.LastDeprmetHodDate)
+            </td> *@
+                @*             <td>
+            @Html.DisplayFor(modelItem => item.AssetAlterMode.AssetAlterName)
+            </td> *@
+                @* <td>
+            @Html.DisplayFor(modelItem => item.Manufacturer)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Vendor)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Specification)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Description)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetStatus.AssetStatusName)
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.BeginUseDate)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetPosition.AssetPositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+                </td>
+                @*             <td>
+            @Html.DisplayFor(modelItem => item.UploadFileName)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.UploadData)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.UploadLength)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.UploadContentType)
+            </td> *@
+                <td>
+                    @*                 <a asp-action="Edit" asp-route-id="@item.AssetId">Edit</a> | *@
+                    @*                 <a asp-action="Details" asp-route-id="@item.AssetId">Details</a> | *@
+                    <a asp-action="Delete" asp-route-id="@item.AssetId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

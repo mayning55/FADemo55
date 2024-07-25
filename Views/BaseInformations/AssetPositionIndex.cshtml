@@ -1,0 +1,37 @@
+﻿@model IEnumerable<FADemo.Models.BaseInformation.AssetPosition>
+
+@{
+    ViewData["Title"] = "AssetPositionIndex";
+}
+
+<h1>AssetPositionIndex</h1>
+
+<p>
+    <a asp-controller="BaseInformations" asp-action="AssetPositionCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetPositionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetPositionDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetPositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetPositionDescription)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

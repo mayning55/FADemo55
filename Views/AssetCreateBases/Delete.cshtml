@@ -1,0 +1,165 @@
+﻿@model FADemo.Models.FixedAsset.AssetCreateBase
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>AssetCreateBase</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetRecordUser)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetRecordUser)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetRecordDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetRecordDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetType.AssetTypeId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Unit)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Unit)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetDeprmetHod)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetDeprmetHod.AssetDeprmetHodId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastDeprmetHodDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastDeprmetHodDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetAlterMode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetAlterMode.AssetAlterModeId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vendor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vendor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Specification)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Specification)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetStatus.AssetStatusId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BeginUseDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BeginUseDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Department.DepartmentId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AssetPosition)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AssetPosition.AssetPositionId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Employee)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Employee.EmployeeId)
+        </dd>
+        @*        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.UploadFileName)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.UploadFileName)
+        </dd>
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.UploadData)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.UploadData)
+        </dd>
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.UploadLength)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.UploadLength)
+        </dd>
+        <dt class = "col-sm-2">
+        @Html.DisplayNameFor(model => model.UploadContentType)
+        </dt>
+        <dd class = "col-sm-10">
+        @Html.DisplayFor(model => model.UploadContentType)
+        </dd> *@
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="AssetId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

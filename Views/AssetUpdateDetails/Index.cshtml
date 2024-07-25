@@ -1,0 +1,78 @@
+﻿@model IEnumerable<FADemo.Models.FixedAsset.AssetUpdateDetail>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@* <p>
+    <a asp-asp-controller="" asp-action="Edit" asp-route-id="@Model?.AssetId">Edit</a>
+</p> *@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetCreateBase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetAlterMode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetPosition)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Employee)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetUpdateUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetUpdateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetCreateBase.AssetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetAlterMode.AssetAlterName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetStatus.AssetStatusName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetPosition.AssetPositionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Employee.EmployeeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetUpdateUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetUpdateTime)
+                </td>
+                @*             <td>
+            <a asp-action="Edit" asp-route-id="@item.AssetUpdateDeteailId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.AssetUpdateDeteailId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.AssetUpdateDeteailId">Delete</a>
+            </td> *@
+            </tr>
+        }
+    </tbody>
+</table>

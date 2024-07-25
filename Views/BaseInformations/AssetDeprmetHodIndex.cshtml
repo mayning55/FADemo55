@@ -1,0 +1,54 @@
+﻿@model IEnumerable<FADemo.Models.BaseInformation.AssetDeprmetHod>
+
+@{
+    ViewData["Title"] = "AssetDeprmetHodIndex";
+}
+
+<h1>AssetDeprmetHodIndex</h1>
+
+<p>
+    <a asp-action="AssetDeprmetHodCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetDeprmetName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetDeprmetDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssetDeproption)
+            </th>
+            @*             <th>
+            @Html.DisplayNameFor(model => model.IsDisabled)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetDeprmetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetDeprmetDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AssetDeproption)
+                </td>
+                @* <td>
+            @Html.DisplayFor(modelItem => item.IsDisabled)
+            </td>
+            <td>
+            <a asp-action="Edit" asp-route-id="@item.AssetDeprmetHodId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.AssetDeprmetHodId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.AssetDeprmetHodId">Delete</a>
+            </td> *@
+            </tr>
+        }
+    </tbody>
+</table>

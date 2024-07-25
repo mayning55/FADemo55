@@ -1,0 +1,44 @@
+﻿@model FADemo.Models.BaseInformation.AssetAlterMode
+
+@{
+    ViewData["Title"] = "AssetAlterModeCreate";
+}
+
+<h1>AssetAlterModeCreate</h1>
+
+<h4>AssetAlterMode</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AssetAlterModeCreate">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AssetAlterName" class="control-label"></label>
+                <input asp-for="AssetAlterName" class="form-control" />
+                <span asp-validation-for="AssetAlterName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AssetAlterDescription" class="control-label"></label>
+                <input asp-for="AssetAlterDescription" class="form-control" />
+                <span asp-validation-for="AssetAlterDescription" class="text-danger"></span>
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => model.IsAdd)
+                <label for="IsAdd">IsAdd</label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="AssetAlterModeIndex">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
