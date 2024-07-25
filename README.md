@@ -6,7 +6,7 @@
       -Identity：可应用于账号和角色，用户的创建和管理，
       -Identity: can be used to create and manage accounts, roles, and users.
       -MVC：模型、视图、管理器，
-      -MVC: Model, view, manager,
+      -MVC: Model, View, Controller,
       -EntityFrameworkCORE和LINQ：与数据库架构的配置及数据的CURD管理，
       -EntityFrameworkCORE and LINQ: configuration of database architecture and CURD management of data,
       -JavaScript：一些技巧性的处理。
