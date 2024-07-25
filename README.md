@@ -16,6 +16,7 @@
 ## Related details
 ### 数据构架见图
 ### See figure for data architecture
+![FADemo](https://github.com/user-attachments/assets/70f7d04b-8884-4bb5-9870-424df607858b)
 
 ### 如何尝试？
 ### How to try?
