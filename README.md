@@ -20,10 +20,9 @@
 
 ### 如何尝试？
 ### How to try?
-- 恢复FADemoDB后修改SQL连接信息
-- After the FADemoDB instance is restored，Modify SQL connection information
-- 直接使用账号：Admin密码：FADemo55%登录。
-- Use account: Admin Password: FADemo55% to log in.
+
+- 直接使用账号：Admin密码：123456登录。
+- Use account: Admin Password: 123456 to log in.
 - 修改Account控制器里的角色验证后创建用户。
 - Modify the role authentication in the Account controller and create a user.
 
