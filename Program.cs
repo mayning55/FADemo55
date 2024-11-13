@@ -47,6 +47,9 @@ namespace FADemo
                 })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            builder.Services.AddHostedService<ClassInit>();//初始化admin
+            builder.Services.AddScoped<InitAdmin>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
