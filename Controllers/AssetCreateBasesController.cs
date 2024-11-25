@@ -13,6 +13,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// Asset管理，在创建时时添加指定字段的增加记录，后续变更同样记录。
+    /// </summary>
     [Authorize(Roles = "Admin,BaseInfoAdmin,GeneralUser")]
     public class AssetCreateBasesController : Controller
     {
@@ -28,8 +31,7 @@ namespace FADemo.Controllers
 
         // GET: AssetCreateBases
         /// <summary>
-        /// 创建Asset，
-        /// 下拉选择各基础资料，上传附件至数据库（上传至指定目录）
+        /// Index首页显示Asset列表，带名称，类型，数量，状态，部门，位置和使用人信息
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -38,7 +40,11 @@ namespace FADemo.Controllers
             var applicationDbContext = _context.AssetCreateBases.Include(a => a.AssetAlterMode).Include(a => a.AssetDeprmetHod).Include(a => a.AssetPosition).Include(a => a.AssetStatus).Include(a => a.AssetType).Include(a => a.Department).Include(a => a.Employee);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        /// <summary>
+        /// 点击AssetNumber，列出具体的明细信息，包含修改记录页和附件瑞
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: AssetCreateBases/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -63,7 +69,10 @@ namespace FADemo.Controllers
 
             return View(assetCreateBase);
         }
-        [HttpGet]
+        /// <summary>
+        ///获取部门列表，在修改明细时，变更部门，使用人也跟随变更
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetDepartments()
         {

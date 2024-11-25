@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 用户管理
+    /// </summary>
 
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
@@ -15,7 +18,7 @@ namespace FADemo.Controllers
 
         private readonly SignInManager<ExtendIdentityUser> signInManager;
 
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public UserController(UserManager<ExtendIdentityUser> userManager,
             SignInManager<ExtendIdentityUser> signInManager,
@@ -23,9 +26,13 @@ namespace FADemo.Controllers
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            _context = context; 
+            this.context = context; 
         }
-
+        /// <summary>
+        /// 在创建时，检查用户名是否已经存在
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
         [HttpPost]
         [HttpGet]
         public async Task<IActionResult> IsUserNameAvailable(string UserName)
@@ -86,7 +93,12 @@ namespace FADemo.Controllers
             var users = userManager.Users;
             return View(users);
         }
-        
+        /// <summary>
+        /// 禁用用户，IsDisabled属性为真，视图界面根据此判断图标字样
+        /// 并将用户锁定时间设为最大。
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> DisableUser(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
@@ -116,7 +128,11 @@ namespace FADemo.Controllers
                 return View("ListUsers");
             }
         }
-
+        /// <summary>
+        /// 启用用户，跟禁用相反
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public async Task<IActionResult> EnableUser(string userId)
         {
             var user = await userManager.FindByIdAsync(userId);
@@ -155,7 +171,11 @@ namespace FADemo.Controllers
 
             return View(resetPassword);
         }
-
+        /// <summary>
+        /// 重置用户密码（先移除密码，再添加密码）
+        /// </summary>
+        /// <param name="resetUserPassword"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> ResetUserPassword(ResetUserPassword resetUserPassword)
         {
@@ -207,7 +227,7 @@ namespace FADemo.Controllers
                 DepartmentId = user.DepartmentId,
                 Roles = userRoles
             };
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentName", user.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(context.Departments, "DepartmentId", "DepartmentName", user.DepartmentId);
 
             return View(editUser);
         }

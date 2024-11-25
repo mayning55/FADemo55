@@ -11,14 +11,17 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// Asset明细
+    /// </summary>
     [Authorize(Roles = "Admin,BaseInfoAdmin,GeneralUser")]
     public class AssetUpdateDetailsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public AssetUpdateDetailsController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         // GET: AssetUpdateDetails
@@ -29,9 +32,9 @@ namespace FADemo.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
-            //var applicationDbContext = _context.AssetUpdateDetails.Include(a => a.AssetAlterMode).Include(a => a.AssetCreateBase).Include(a => a.AssetPosition).Include(a => a.AssetStatus).Include(a => a.Department).Include(a => a.Employee);
+            //var applicationDbContext = context.AssetUpdateDetails.Include(a => a.AssetAlterMode).Include(a => a.AssetCreateBase).Include(a => a.AssetPosition).Include(a => a.AssetStatus).Include(a => a.Department).Include(a => a.Employee);
             //return View(await applicationDbContext.ToListAsync());
-            var applicationDbContext = _context.AssetUpdateDetails.Include(a => a.AssetAlterMode)
+            var applicationDbContext = context.AssetUpdateDetails.Include(a => a.AssetAlterMode)
                 .Include(a => a.AssetCreateBase)
                 .Include(a => a.AssetPosition)
                 .Include(a => a.AssetStatus)

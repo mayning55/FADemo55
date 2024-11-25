@@ -1,5 +1,6 @@
 using FADemo.Models;
 using FADemo.Models.Account;
+using FADemo.Models.BaseInformation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

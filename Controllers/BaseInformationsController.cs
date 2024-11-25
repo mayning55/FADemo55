@@ -8,21 +8,21 @@ using Microsoft.AspNetCore.Authorization;
 namespace FADemo.Controllers
 {
     /// <summary>
-    /// 各基础信息的创建
+    /// 各基础属性的创建，包含类型（是否禁用），状态，存放位置，折旧方法，变动方式
     /// </summary>
     [Authorize(Roles = "Admin,BaseInfoAdmin")]
     public class BaseInformationsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public BaseInformationsController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<IActionResult> AssetTypeIndex()
         {
-            return View(await _context.AssetTypes.ToListAsync());
+            return View(await context.AssetTypes.ToListAsync());
         }
         [HttpGet]
         public IActionResult AssetTypeCreate()
@@ -35,8 +35,8 @@ namespace FADemo.Controllers
             if (ModelState.IsValid)
             {
                 assettype.AssetTypeCreateDatetime = DateTime.Now;
-                _context.Add(assettype);
-                await _context.SaveChangesAsync();
+                context.Add(assettype);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(AssetTypeIndex));
             }
             return View(assettype);
@@ -44,7 +44,7 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> AssetTypeDisable(int Id)
         {
-            var item = _context.AssetTypes.FirstOrDefault(x => x.AssetTypeId == Id);
+            var item = context.AssetTypes.FirstOrDefault(x => x.AssetTypeId == Id);
 
             if (item == null)
             {
@@ -55,13 +55,13 @@ namespace FADemo.Controllers
                 if (item.AssetTypeIsDisabled == false)
                 {
                     item.AssetTypeIsDisabled = true;
-                    await _context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
                     return RedirectToAction(nameof(AssetTypeIndex));
                 }
                 else
                 {
                     item.AssetTypeIsDisabled = false;
-                    await _context.SaveChangesAsync();
+                    await context.SaveChangesAsync();
                     return RedirectToAction(nameof(AssetTypeIndex));
                 }
             }
@@ -69,7 +69,7 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> AssetStatusIndex()
         {
-            return View(await _context.AssetStatuses.ToListAsync());
+            return View(await context.AssetStatuses.ToListAsync());
         }
         [HttpGet]
         public IActionResult AssetStatusCreate()
@@ -83,8 +83,8 @@ namespace FADemo.Controllers
             if (ModelState.IsValid)
             {
                 assetstatus.CreateDatetime = DateTime.Now;
-                _context.Add(assetstatus);
-                await _context.SaveChangesAsync();
+                context.Add(assetstatus);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(AssetStatusIndex));
             }
             return View(assetstatus);
@@ -92,7 +92,7 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> AssetPositionIndex()
         {
-            return View(await _context.AssetPositions.ToListAsync());
+            return View(await context.AssetPositions.ToListAsync());
         }
 
         [HttpGet]
@@ -106,8 +106,8 @@ namespace FADemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(assetposition);
-                await _context.SaveChangesAsync();
+                context.Add(assetposition);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(AssetPositionIndex));
             }
             return View(assetposition);
@@ -115,7 +115,7 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> AssetDeprmetHodIndex()
         {
-            return View(await _context.AssetDeprmetHods.ToListAsync());
+            return View(await context.AssetDeprmetHods.ToListAsync());
         }
 
         [HttpGet]
@@ -129,8 +129,8 @@ namespace FADemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(assetdeprmethod);
-                await _context.SaveChangesAsync();
+                context.Add(assetdeprmethod);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(AssetDeprmetHodIndex));
             }
             return View(assetdeprmethod);
@@ -138,7 +138,7 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> AssetAlterModeIndex()
         {
-            return View(await _context.AssetAlterModes.ToListAsync());
+            return View(await context.AssetAlterModes.ToListAsync());
         }
 
         [HttpGet]
@@ -152,8 +152,8 @@ namespace FADemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(assetaltermode);
-                await _context.SaveChangesAsync();
+                context.Add(assetaltermode);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(AssetAlterModeIndex));
             }
             return View(assetaltermode);

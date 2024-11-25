@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FADemo.Models.FixedAsset
 {
+    /// <summary>
+    /// Asset变更明细记录
+    /// </summary>
     public class AssetUpdateDetail
     {
         [Key]

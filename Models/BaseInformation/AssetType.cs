@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FADemo.Models.BaseInformation
 {
+    /// <summary>
+    /// Asset类型
+    /// </summary>
     public class AssetType
     {
         [Key]

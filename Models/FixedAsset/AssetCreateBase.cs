@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FADemo.Models.FixedAsset
 {
+    /// <summary>
+    /// Asset
+    /// </summary>
     public class AssetCreateBase
     {
         [Key]

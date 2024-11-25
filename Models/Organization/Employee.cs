@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FADemo.Models.Organization
 {
+    /// <summary>
+    /// 人员信息
+    /// </summary>
     public class Employee
     {
         public int EmployeeId { get; set; }

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace FADemo.Models.Account
 {
+    /// <summary>
+    /// 托管服务用于初始化Admin信息
+    /// </summary>
     public class ClassInit : BackgroundService
     {
         private readonly IServiceScope iServiceScope;

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FADemo.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240722035155_FA02")]
-    partial class FA02
+    [Migration("20241125124135_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

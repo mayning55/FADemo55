@@ -14,6 +14,11 @@ namespace FADemo.Models
             : base(options)
         {
         }
+        /// <summary>
+        /// 一个角色可以有多个用户
+        /// 一个Asset可以有多条变更记录。
+        /// </summary>
+        /// <param name="builder"></param>
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

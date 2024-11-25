@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FADemo.Models.BaseInformation
 {
+    /// <summary>
+    /// 折旧方式
+    /// </summary>
     public class AssetDeprmetHod
     {
         [Key]

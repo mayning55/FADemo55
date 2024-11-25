@@ -77,6 +77,11 @@ namespace FADemo.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 点击用户名进行修改用户密码
+        /// </summary>
+        /// <param name="changePassword"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> ChangePassword(ChangePassword changePassword)
@@ -114,6 +119,10 @@ namespace FADemo.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 用户退出登录
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> UserLogout()
         {

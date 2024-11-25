@@ -11,20 +11,23 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 使用人
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class EmployeesController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public EmployeesController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Employees.Include(e => e.Department);
+            var applicationDbContext = context.Employees.Include(e => e.Department);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -36,7 +39,7 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
+            var employee = await context.Employees
                 .Include(e => e.Department)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
@@ -50,7 +53,7 @@ namespace FADemo.Controllers
         // GET: Employees/Create
         public IActionResult Create()
         {
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentName");
+            ViewData["DepartmentId"] = new SelectList(context.Departments, "DepartmentId", "DepartmentName");
             return View();
         }
 
@@ -64,11 +67,11 @@ namespace FADemo.Controllers
             if (ModelState.IsValid)
             {
                 employee.CreateDatetime = DateTime.Now;
-                _context.Add(employee);
-                await _context.SaveChangesAsync();
+                context.Add(employee);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(context.Departments, "DepartmentId", "DepartmentId", employee.DepartmentId);
             return View(employee);
         }
 
@@ -80,12 +83,12 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await context.Employees.FindAsync(id);
             if (employee == null)
             {
                 return NotFound();
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentName", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(context.Departments, "DepartmentId", "DepartmentName", employee.DepartmentId);
             return View(employee);
         }
 
@@ -105,8 +108,8 @@ namespace FADemo.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
-                    await _context.SaveChangesAsync();
+                    context.Update(employee);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -121,7 +124,7 @@ namespace FADemo.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DepartmentId", employee.DepartmentId);
+            ViewData["DepartmentId"] = new SelectList(context.Departments, "DepartmentId", "DepartmentId", employee.DepartmentId);
             return View(employee);
         }
 
@@ -133,7 +136,7 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
+            var employee = await context.Employees
                 .Include(e => e.Department)
                 .FirstOrDefaultAsync(m => m.EmployeeId == id);
             if (employee == null)
@@ -149,19 +152,19 @@ namespace FADemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await context.Employees.FindAsync(id);
             if (employee != null)
             {
-                _context.Employees.Remove(employee);
+                context.Employees.Remove(employee);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.EmployeeId == id);
+            return context.Employees.Any(e => e.EmployeeId == id);
         }
     }
 }

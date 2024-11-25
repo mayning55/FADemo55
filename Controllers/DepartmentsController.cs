@@ -11,20 +11,23 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 部门
+    /// </summary>
     [Authorize(Roles = "Admin")]
     public class DepartmentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public DepartmentsController(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         // GET: Departments
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Departments.ToListAsync());
+            return View(await context.Departments.ToListAsync());
         }
 
         // GET: Departments/Details/5
@@ -35,7 +38,7 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments
+            var department = await context.Departments
                 .FirstOrDefaultAsync(m => m.DepartmentId == id);
             if (department == null)
             {
@@ -61,8 +64,8 @@ namespace FADemo.Controllers
             if (ModelState.IsValid)
             {
                 department.CreateDatetime = DateTime.Now;
-                _context.Add(department);
-                await _context.SaveChangesAsync();
+                context.Add(department);
+                await context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(department);
@@ -76,7 +79,7 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments.FindAsync(id);
+            var department = await context.Departments.FindAsync(id);
             if (department == null)
             {
                 return NotFound();
@@ -88,7 +91,7 @@ namespace FADemo.Controllers
                 DepartmentNumber = department.DepartmentNumber,
                 DepartmentName = department.DepartmentName,
                 CreateDatetime = department.CreateDatetime,
-                Employees = _context.Employees.Where(d => d.DepartmentId == id).ToList(),
+                Employees = context.Employees.Where(d => d.DepartmentId == id).ToList(),
             };
 
             return View(model);
@@ -110,8 +113,8 @@ namespace FADemo.Controllers
             {
                 try
                 {
-                    _context.Update(department);
-                    await _context.SaveChangesAsync();
+                    context.Update(department);
+                    await context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,7 +140,7 @@ namespace FADemo.Controllers
                 return NotFound();
             }
 
-            var department = await _context.Departments
+            var department = await context.Departments
                 .FirstOrDefaultAsync(m => m.DepartmentId == id);
             if (department == null)
             {
@@ -152,19 +155,19 @@ namespace FADemo.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var department = await _context.Departments.FindAsync(id);
+            var department = await context.Departments.FindAsync(id);
             if (department != null)
             {
-                _context.Departments.Remove(department);
+                context.Departments.Remove(department);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool DepartmentExists(int id)
         {
-            return _context.Departments.Any(e => e.DepartmentId == id);
+            return context.Departments.Any(e => e.DepartmentId == id);
         }
     }
 }

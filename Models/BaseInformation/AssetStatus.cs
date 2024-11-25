@@ -5,6 +5,9 @@ namespace FADemo.Models.BaseInformation
 {
     public class AssetStatus
     {
+        /// <summary>
+        /// Asset状态
+        /// </summary>
         [Key]
         public int AssetStatusId { get; set; }
 

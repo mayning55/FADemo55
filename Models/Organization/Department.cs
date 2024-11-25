@@ -2,6 +2,9 @@
 
 namespace FADemo.Models.Organization
 {
+    /// <summary>
+    /// 部门信息
+    /// </summary>
     public class Department
     {
         public int DepartmentId { get; set; }

@@ -2,6 +2,9 @@
 
 namespace FADemo.Models.FixedAsset
 {
+    /// <summary>
+    /// 附件，
+    /// </summary>
     public class AssetAttachment
     {
         [Key]

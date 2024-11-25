@@ -7,17 +7,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 角色配置，在修改角色明细可以添加或删除用户
+    /// </summary>
 
     [Authorize(Roles = "Admin")]
     public class RoleController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly UserManager<ExtendIdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<ExtendIdentityUser> userManager;
 
         public RoleController(RoleManager<IdentityRole> roleManager, UserManager<ExtendIdentityUser> userManager)
         {
-            _roleManager = roleManager;
-            _userManager = userManager;
+            this.roleManager = roleManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -31,7 +34,7 @@ namespace FADemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                bool roleExists = await _roleManager.RoleExistsAsync(createRole?.RoleName);
+                bool roleExists = await roleManager.RoleExistsAsync(createRole?.RoleName);
                 if (roleExists)
                 {
                     ModelState.AddModelError("", "Role Already Exists");
@@ -43,7 +46,7 @@ namespace FADemo.Controllers
                         Name = createRole?.RoleName
                     };
 
-                    IdentityResult result = await _roleManager.CreateAsync(identityRole);
+                    IdentityResult result = await roleManager.CreateAsync(identityRole);
 
                     if (result.Succeeded)
                     {
@@ -63,14 +66,14 @@ namespace FADemo.Controllers
         [HttpGet]
         public async Task<IActionResult> ListRoles()
         {
-            List<IdentityRole> roles = await _roleManager.Roles.ToListAsync();
+            List<IdentityRole> roles = await roleManager.Roles.ToListAsync();
             return View(roles);
         }
 
         [HttpGet]
         public async Task<IActionResult> EditRole(string roleId)
         {
-            IdentityRole role = await _roleManager.FindByIdAsync(roleId);
+            IdentityRole role = await roleManager.FindByIdAsync(roleId);
             if (role == null)
             {
                 return View("Error");
@@ -82,9 +85,9 @@ namespace FADemo.Controllers
                 RoleName = role.Name,
                 Users = new List<string>()
             };
-            foreach (var user in _userManager.Users.ToList())
+            foreach (var user in userManager.Users.ToList())
             {
-                if (await _userManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     model.Users.Add(user.UserName);
                 }
@@ -98,22 +101,20 @@ namespace FADemo.Controllers
         {
             if (ModelState.IsValid)
             {
-                var role = await _roleManager.FindByIdAsync(editRole.Id);
+                var role = await roleManager.FindByIdAsync(editRole.Id);
                 if (role == null)
                 {
-                    // Handle the scenario when the role is not found
                     ViewBag.ErrorMessage = $"Role with Id = {editRole.Id} cannot be found";
                     return View("NotFound");
                 }
                 else
                 {
                     role.Name = editRole.RoleName;
-                    // Update other properties if needed
-
-                    var result = await _roleManager.UpdateAsync(role);
+                    
+                    var result = await roleManager.UpdateAsync(role);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("ListRoles"); // Redirect to the roles list
+                        return RedirectToAction("ListRoles"); 
                     }
 
                     foreach (var error in result.Errors)
@@ -131,19 +132,17 @@ namespace FADemo.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string roleId)
         {
-            var role = await _roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(roleId);
             if (role == null)
             {
-                // Role not found, handle accordingly
                 ViewBag.ErrorMessage = $"Role with Id = {roleId} cannot be found";
                 return View("NotFound");
             }
 
-            var result = await _roleManager.DeleteAsync(role);
+            var result = await roleManager.DeleteAsync(role);
             if (result.Succeeded)
             {
-                // Role deletion successful
-                return RedirectToAction("ListRoles"); // Redirect to the roles list page
+                return RedirectToAction("ListRoles");
             }
 
             foreach (var error in result.Errors)
@@ -151,8 +150,7 @@ namespace FADemo.Controllers
                 ModelState.AddModelError("", error.Description);
             }
 
-            // If we reach here, something went wrong, return to the view
-            return View("ListRoles", await _roleManager.Roles.ToListAsync());
+            return View("ListRoles", await roleManager.Roles.ToListAsync());
         }
 
         [HttpGet]
@@ -160,7 +158,7 @@ namespace FADemo.Controllers
         {
             ViewBag.roleId = roleId;
 
-            var role = await _roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
@@ -171,7 +169,7 @@ namespace FADemo.Controllers
             ViewBag.RollName = role.Name;
             var model = new List<UserInRole>();
 
-            foreach (var user in _userManager.Users.ToList())
+            foreach (var user in userManager.Users.ToList())
             {
                 var userInRole = new UserInRole
                 {
@@ -179,7 +177,7 @@ namespace FADemo.Controllers
                     UserName = user.UserName
                 };
 
-                if (await _userManager.IsInRoleAsync(user, role.Name))
+                if (await userManager.IsInRoleAsync(user, role.Name))
                 {
                     userInRole.IsSelected = true;
                 }
@@ -198,8 +196,7 @@ namespace FADemo.Controllers
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserInRole> userInRoles, string roleId)
         {
-            //First check whether the Role Exists or not
-            var role = await _roleManager.FindByIdAsync(roleId);
+            var role = await roleManager.FindByIdAsync(roleId);
 
             if (role == null)
             {
@@ -209,27 +206,24 @@ namespace FADemo.Controllers
 
             for (int i = 0; i < userInRoles.Count; i++)
             {
-                var user = await _userManager.FindByIdAsync(userInRoles[i].UserId);
+                var user = await userManager.FindByIdAsync(userInRoles[i].UserId);
 
                 IdentityResult? result;
 
-                if (userInRoles[i].IsSelected && !(await _userManager.IsInRoleAsync(user, role.Name)))
+                if (userInRoles[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name)))
                 {
-                    //If IsSelected is true and User is not already in this role, then add the user
-                    result = await _userManager.AddToRoleAsync(user, role.Name);
+                    result = await userManager.AddToRoleAsync(user, role.Name);
                 }
-                else if (!userInRoles[i].IsSelected && await _userManager.IsInRoleAsync(user, role.Name))
+                else if (!userInRoles[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
                 {
-                    //If IsSelected is false and User is already in this role, then remove the user
-                    result = await _userManager.RemoveFromRoleAsync(user, role.Name);
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
                 }
+                //如果选择用户则添加至角色，反则从角色移除
                 else
                 {
-                    //Don't do anything simply continue the loop
                     continue;
                 }
 
-                //If you add or remove any user, please check the Succeeded of the IdentityResult
                 if (result.Succeeded)
                 {
                     if (i < (userInRoles.Count - 1))
