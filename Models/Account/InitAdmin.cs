@@ -1,5 +1,4 @@
-﻿using ClassLibrary.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace FADemo.Models.Account
             var userAdmin = await userManager.FindByNameAsync("Admin");
             if (userAdmin == null)
             {
-                userAdmin = new UserExtend()
+                userAdmin = new ExtendIdentityUser()
                 {
                     UserName = "Admin"
                 };
@@ -53,7 +52,7 @@ namespace FADemo.Models.Account
             var user1= await userManager.FindByNameAsync("User1");
             if (user1 == null)
             {
-                user1 = new UserExtend()
+                user1 = new ExtendIdentityUser()
                 {
                     UserName = "User1"
                 };

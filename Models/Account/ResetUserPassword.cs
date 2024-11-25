@@ -4,6 +4,9 @@ namespace FADemo.Models.Account
 {
     public class ResetUserPassword
     {
+        /// <summary>
+        /// 重置密码
+        /// </summary>
         [Required]
         public string Id { get; set; }
 

@@ -15,6 +15,13 @@ namespace FADemo.Controllers
         {
             _context = context;
         }
+
+        /// <summary>
+        /// 根据assetid查询附件
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="assetCreateBase"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id, AssetCreateBase assetCreateBase)
         {
             TempData["assetid"] = id;
@@ -25,7 +32,6 @@ namespace FADemo.Controllers
 
         public async Task<IActionResult> ShowFile(int id)
         {
-            // Assuming 'Files' is your DbSet of images
             var file = await _context.AssetAttachments.FirstOrDefaultAsync(f => f.AttachmentId == id);
             {
                 return File(file.Data, file.ContentType);

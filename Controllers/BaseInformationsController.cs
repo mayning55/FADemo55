@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 各基础信息的创建
+    /// </summary>
     [Authorize(Roles = "Admin,BaseInfoAdmin")]
     public class BaseInformationsController : Controller
     {

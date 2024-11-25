@@ -27,6 +27,11 @@ namespace FADemo.Controllers
         }
 
         // GET: AssetCreateBases
+        /// <summary>
+        /// 创建Asset，
+        /// 下拉选择各基础资料，上传附件至数据库（上传至指定目录）
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {

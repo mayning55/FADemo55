@@ -22,11 +22,22 @@ namespace FADemo.Controllers
         }
 
         // GET: AssetUpdateDetails
+        /// <summary>
+        /// 更新明细
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(int? id)
         {
             //var applicationDbContext = _context.AssetUpdateDetails.Include(a => a.AssetAlterMode).Include(a => a.AssetCreateBase).Include(a => a.AssetPosition).Include(a => a.AssetStatus).Include(a => a.Department).Include(a => a.Employee);
             //return View(await applicationDbContext.ToListAsync());
-            var applicationDbContext = _context.AssetUpdateDetails.Include(a => a.AssetAlterMode).Include(a => a.AssetCreateBase).Include(a => a.AssetPosition).Include(a => a.AssetStatus).Include(a => a.Department).Include(a => a.Employee).Where(m => m.AssetId == id);
+            var applicationDbContext = _context.AssetUpdateDetails.Include(a => a.AssetAlterMode)
+                .Include(a => a.AssetCreateBase)
+                .Include(a => a.AssetPosition)
+                .Include(a => a.AssetStatus)
+                .Include(a => a.Department)
+                .Include(a => a.Employee)
+                .Where(m => m.AssetId == id);
             return View(await applicationDbContext.ToListAsync());
         }
     }

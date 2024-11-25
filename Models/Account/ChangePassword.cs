@@ -4,6 +4,9 @@ namespace FADemo.Models.Account
 {
     public class ChangePassword
     {
+        /// <summary>
+        /// 修改密码
+        /// </summary>
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current Password")]

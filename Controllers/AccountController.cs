@@ -5,6 +5,9 @@ using FADemo.Models.Account;
 
 namespace FADemo.Controllers
 {
+    /// <summary>
+    /// 用户登录控制器
+    /// </summary>
     public class AccountController : Controller
     {
 
@@ -19,8 +22,6 @@ namespace FADemo.Controllers
             this.signInManager = signInManager;
         }
 
-        
-
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string? ReturnUrl = null)
@@ -28,7 +29,12 @@ namespace FADemo.Controllers
             ViewData["ReturnUrl"] = ReturnUrl;
             return View();
         }
-
+        /// <summary>
+        /// 用户登录成功后跳转至登录前访问的页面
+        /// </summary>
+        /// <param name="userLogin"></param>
+        /// <param name="ReturnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(UserLogin userLogin, string? ReturnUrl)
