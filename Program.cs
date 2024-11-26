@@ -1,6 +1,7 @@
 using FADemo.Models;
 using FADemo.Models.Account;
 using FADemo.Models.BaseInformation;
+using FADemo.Models.BaseInformation.InitDate;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -48,13 +49,19 @@ namespace FADemo
                 })
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            builder.Services.AddHostedService<ClassInit>();//初始化admin
+            builder.Services.AddHostedService<ClassInit>();//初始化admin用户信息
             builder.Services.AddScoped<InitAdmin>();
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
+            using (var scop = app.Services.CreateScope())
+            {
+                var services = scop.ServiceProvider;//Data-seed初始化一些数据
+                BaseInit.InitBaseData(services);
+            }
+
+                // Configure the HTTP request pipeline.
+                if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
